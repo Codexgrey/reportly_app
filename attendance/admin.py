@@ -9,7 +9,7 @@ from .models import Book, Student
 class BookAdmin(admin.ModelAdmin):
     # list_per_page = 2
     # list_editable = ['isbn']
-    list_display = ['title', 'no_of_pages', 'isbn']
+    list_display = ['title', 'no_of_pages', 'isbn' , 'date']
     list_filter = ['date']
     search_fields = ['title', 'body', 'author']
 

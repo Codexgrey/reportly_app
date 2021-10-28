@@ -7,7 +7,8 @@ class Book(models.Model):
     author = models.CharField(max_length=300)
     body = models.TextField()
     isbn = models.CharField(max_length=15, null=True, blank=True)
-    date = models.DateTimeField()
+    date = models.DateTimeField(auto_now_add=True)
+
 
     def __str__(self):
         return self.title
