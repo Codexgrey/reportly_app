@@ -11,6 +11,12 @@
     <body>
         <h1>My header</h1>
         <h>Another one</h>
+
+        <ol>
+            {% for book in books %}
+            <li>{{ book.title <!-- | slugify --> }}</li>  
+            {% endfor %}
+        </ol>
         
         
     </body>
