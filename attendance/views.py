@@ -4,8 +4,8 @@ from .models import Book
 
 # Create your views here.
 def test_view(request):
-    myBooks = Book.objects.all()
-    context = { 'books': myBooks }
+    all_books = Book.objects.all()
+    context = { 'books': all_books }
 
     return render(request, 'test.html', context)
 
