@@ -2,11 +2,13 @@ from django.shortcuts import redirect, render
 from django.contrib.auth import authenticate
 from django.contrib import messages
 from django.contrib.auth.models import User
+from django.contrib.auth.hashers import make_password
+
 
 # Create your views here.
 def password_isvalid(password):
     #password logic
-    if (len(password) < 6) or (len(password) > 8):
+    if (len(password) < 6) or (len(password) > 12):
         isValid = False
     elif not any(char.isdigit() for char in password): 
         isValid = False
@@ -23,10 +25,20 @@ def password_isvalid(password):
 
 def login_view(request):
     if request.method == 'POST':
+        # for encrypted passwords
+        # users = User.objects.values()
+        # usernames = []
+        # passwords = []
+    
+        # for user in range(0, len(users)):
+        #     usernames.append(users[user]['username'])
+        #     passwords.append(users[user]['password'])
+
         username = request.POST.get('username')
         password = request.POST.get('password')
         user = authenticate(request, username=username, password=password)
 
+        # if username in usernames and password in passwords:
         if user:
             return redirect('attendance:all_books')
         else:
@@ -47,12 +59,12 @@ def signup_view(request):
 
         # confirming password
         if password == re_password:
-            # check that password is valid and add to data if valid
+            # check that password is valid and add to data if valid 
             if password_isvalid(password):
-                data['password'] = password
+                data['password'] = make_password(password)
                 # adding user to database via django User (model.Manager.create())
                 try:
-                    User.objects.create(**data)
+                    User.objects.create(**data, is_active=True)
                     messages.success(request, "Account created successfully!")
                 except Exception:
                     messages.warning(request, "Username not available")
