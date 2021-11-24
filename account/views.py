@@ -25,21 +25,12 @@ def password_isvalid(password):
 
 def login_view(request):
     if request.method == 'POST':
-        # for encrypted passwords
-        # users = User.objects.values()
-        # usernames = []
-        # passwords = []
-    
-        # for user in range(0, len(users)):
-        #     usernames.append(users[user]['username'])
-        #     passwords.append(users[user]['password'])
-
         username = request.POST.get('username')
         password = request.POST.get('password')
         user = authenticate(request, username=username, password=password)
 
-        # if username in usernames and password in passwords:
         if user:
+            # redirecting user to homepage, once verified
             return redirect('attendance:all_books')
         else:
             messages.warning(request, 'Please enter a valid username and password')
