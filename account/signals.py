@@ -21,5 +21,5 @@ def send_activate_email(sender, instance, created, **kwargs):
             subject="Your Account has been created!", 
             message=message, 
             recipient_list=[instance.email],
-            from_email="admin@reportly.com"
+            from_email="thecodexgrey@gmail.com" # admin@reportly.com
             )
